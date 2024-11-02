@@ -8,7 +8,6 @@
     <style>
         html {
             box-sizing: border-box;
-            overflow: -moz-hidden-unscrollable;
             overflow: hidden;
         }
         *, *:before, *:after {
@@ -28,14 +27,16 @@
 <body>
     <div id="swagger-ui"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.3/swagger-ui-bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.3/swagger-ui-standalone-preset.js"></script>
     <script>
         const ui = SwaggerUIBundle({
             url: 'collection.json', // Replace with your JSON file name
             dom_id: '#swagger-ui',
             presets: [
                 SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset // Include the standalone preset
             ],
-            layout: "StandaloneLayout"
+            layout: "BaseLayout" // Use the BaseLayout instead of StandaloneLayout
         });
     </script>
 </body>
