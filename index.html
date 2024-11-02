@@ -4,40 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.3/swagger-ui.css" />
-    <style>
-        html {
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
-        body {
-            margin: 0;
-            background: #f4f4f4;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-        }
-        .swagger-ui {
-            background: white;
-            padding: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 </head>
 <body>
-    <div id="swagger-ui"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.3/swagger-ui-bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.3/swagger-ui-standalone-preset.js"></script>
+    <div class="container">
+        <h1>API Documentation</h1>
+        <pre id="jsonContent"></pre>
+    </div>
     <script>
-        const ui = SwaggerUIBundle({
-            url: 'collection.json', // Replace with your JSON file name
-            dom_id: '#swagger-ui',
-            presets: [
-                SwaggerUIBundle.presets.apis,
-                SwaggerUIStandalonePreset // Include the standalone preset
-            ],
-            layout: "BaseLayout" // Use the BaseLayout instead of StandaloneLayout
-        });
+        fetch('collection.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('jsonContent').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error loading the JSON:', error));
     </script>
 </body>
 </html>
