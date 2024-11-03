@@ -1,426 +1,270 @@
-# AlgoSuite APIs
-# 📁 Folder: Auth 
+# AlgoSuite API Documentation
 
+## Table of Contents
+- [Authentication](#authentication)
+  - [Register User](#register-user)
+  - [Login User](#login-user)
+  - [Get User Profile](#get-user-profile)
+- [String Operations](#string-operations)
+  - [Get Substring Data](#get-substring-data)
+  - [Get String History](#get-string-history)
+  - [Get String Suggestions](#get-string-suggestions)
+- [Tree Operations](#tree-operations)
+  - [Generate Binary Tree](#generate-binary-tree)
+  - [Save Binary Tree](#save-binary-tree)
+  - [Get Binary Tree Calculations](#get-binary-tree-calculations)
+  - [Get User Tree](#get-user-tree)
 
-## End-point: Register User
-### Method: POST
->```
->/auth/register
->```
-### Headers
+## Authentication
 
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
+### Register User
+Register a new user account.
 
+**Endpoint:** `POST /auth/register`
 
-### Body (**raw**)
+**Headers:**
+```
+Content-Type: application/json
+```
 
+**Request Body Schema:**
 ```json
 {
-    "name": "Test User",
-    "email": "",
-    "password": "Password123!"
+    "name": "string",
+    "email": "string",
+    "password": "string"
 }
 ```
 
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIzLCJpYXQiOjE3MzA1NzE4NzYsImV4cCI6MTczMTE3NjY3Nn0.Q-fK2pYMMExY6kudOh8Dthw0I86CwSVur_BzOHVD6Hg"
+    "token": "string"
 }
 ```
 
+### Login User
+Authenticate an existing user.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+**Endpoint:** `POST /auth/login`
 
-## End-point: Login User
-### Method: POST
->```
->/auth/login
->```
-### Headers
+**Headers:**
+```
+Content-Type: application/json
+```
 
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
-
-
-### Body (**raw**)
-
+**Request Body Schema:**
 ```json
 {
-    "email": "",
-    "password": "Password123!"
+    "email": "string",
+    "password": "string"
 }
 ```
 
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIzLCJpYXQiOjE3MzA1NzE5MzgsImV4cCI6MTczMTE3NjczOH0.8avu6lEyqd4W82c8xUAzaaGJ9iVxpJreFAhA2380z5g"
+    "token": "string"
 }
 ```
 
+### Get User Profile
+Retrieve the authenticated user's profile.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+**Endpoint:** `GET /auth/user`
 
-## End-point: Get User Profile
-### Method: GET
->```
->/auth/user
->```
-### Headers
+**Headers:**
+```
+auth-key: string
+```
 
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 {
-    "userId": 23,
-    "email": "testuser@example.com",
-    "name": "Test User"
+    "userId": "number",
+    "email": "string",
+    "name": "string"
 }
 ```
 
+## String Operations
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Folder: String Operations 
+### Get Substring Data
+Get all possible substrings and related data for a given input string.
 
+**Endpoint:** `GET /string/{inputstring}/substrings`
 
-## End-point: Get Substring Data
-### Method: GET
->```
->/string//substrings
->```
-### Headers
+**Headers:**
+```
+auth-key: string
+```
 
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 {
-    "string": "calculation",
-    "longestSubstringLength": 8,
-    "uniqueSubstring": [
-        "c",
-        "ca",
-        "cal",
-        "a",
-        "al",
-        "alc",
-        "alcu",
-        "l",
-        "lc",
-        "lcu",
-        "c",
-        "cu",
-        "cul",
-        "cula",
-        "culat",
-        "culati",
-        "culatio",
-        "culation",
-        "u",
-        "ul",
-        "ula",
-        "ulat",
-        "ulati",
-        "ulatio",
-        "ulation",
-        "l",
-        "la",
-        "lat",
-        "lati",
-        "latio",
-        "lation",
-        "a",
-        "at",
-        "ati",
-        "atio",
-        "ation",
-        "t",
-        "ti",
-        "tio",
-        "tion",
-        "i",
-        "io",
-        "ion",
-        "o",
-        "on",
-        "n"
-    ],
-    "userId": 23
+    "string": "string",
+    "longestSubstringLength": "number",
+    "uniqueSubstring": ["string"],
+    "userId": "number"
 }
 ```
 
+### Get String History
+Retrieve history of string operations with pagination.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+**Endpoint:** `GET /string/history`
 
-## End-point: Get String History
-### Method: GET
->```
->/string/history?criteria={"limit":10,"skip":0}
->```
-### Headers
+**Headers:**
+```
+auth-key: string
+```
 
-|Content-Type|Value|
-|---|---|
-|auth-key||
+**Query Parameters Schema:**
+```
+criteria={"limit": "number", "skip": "number"}
+```
 
-
-### Query Params
-
-|Param|value|
-|---|---|
-|criteria|{"limit":10,"skip":0}|
-
-
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 [
     {
-        "id": 37,
-        "user_id": 23,
-        "input_string": "teststring",
-        "longest_substring_length": 6,
-        "unique_substrings": [
-            "t",
-            "te",
-            "tes",
-            "e",
-            "es",
-            "est",
-            "s",
-            "st",
-            "t",
-            "ts",
-            "s",
-            "st",
-            "str",
-            "stri",
-            "strin",
-            "string",
-            "t",
-            "tr",
-            "tri",
-            "trin",
-            "tring",
-            "r",
-            "ri",
-            "rin",
-            "ring",
-            "i",
-            "in",
-            "ing",
-            "n",
-            "ng",
-            "g"
-        ],
-        "created_at": "2024-11-02T18:26:24.755Z"
+        "id": "number",
+        "user_id": "number",
+        "input_string": "string",
+        "longest_substring_length": "number",
+        "unique_substrings": ["string"],
+        "created_at": "string (ISO date)"
     }
 ]
 ```
 
+### Get String Suggestions
+Get suggestions based on a search key.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+**Endpoint:** `GET /string/{searchkey}/suggestions`
 
-## End-point: Get String Suggestions
-### Method: GET
->```
->/string//suggestions
->```
-### Headers
+**Headers:**
+```
+auth-key: string
+```
 
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 [
-    "testify",
-    "testimony",
-    "testing"
+    "string"
 ]
 ```
 
+## Tree Operations
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Folder: Tree Operations 
+### Generate Binary Tree
+Generate a new binary tree with specified depth.
 
+**Endpoint:** `POST /tree/generate`
 
-## End-point: Generate Binary Tree
-### Method: POST
->```
->/tree/generate
->```
-### Headers
+**Headers:**
+```
+Content-Type: application/json
+auth-key: string
+```
 
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
-
-
-### Body (**raw**)
-
+**Request Body Schema:**
 ```json
 {
-    "depth": 3
+    "depth": "number"
 }
 ```
 
-### Response: 200
+**Response Schema:** `200 OK`
 ```json
 {
-    "value": 90,
-    "uniqueId": "8c969ebb-a47f-4134-9d9e-584558f1d9ed",
+    "value": "number",
+    "uniqueId": "string",
     "left": {
-        "value": 12,
-        "uniqueId": "d1530347-d7a7-4884-9e8a-d93e3dffd027",
-        "left": {
-            "value": 76,
-            "uniqueId": "557ddaf1-6c05-46f6-933b-e21bb15f812f"
-        }
+        "value": "number",
+        "uniqueId": "string",
+        "left": "object (recursive tree structure)",
+        "right": "object (recursive tree structure)"
     },
     "right": {
-        "value": 53,
-        "uniqueId": "f7d8cbcc-b337-4105-8cbf-861cee301ce8",
-        "right": {
-            "value": 38,
-            "uniqueId": "85401bfd-3aec-42e0-bebe-fa593d38b064"
-        }
+        "value": "number",
+        "uniqueId": "string",
+        "left": "object (recursive tree structure)",
+        "right": "object (recursive tree structure)"
     }
 }
 ```
 
+### Save Binary Tree
+Save a binary tree structure.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+**Endpoint:** `POST /tree`
 
-## End-point: Save Binary Tree
-### Method: POST
->```
->/tree
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
-
-
-### Body (**raw**)
-
-```json
-{
-    "tree": 
-}
+**Headers:**
+```
+Content-Type: application/json
+auth-key: string
 ```
 
-### Response: 200
-```json
-true
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Binary Tree Calculations
-### Method: GET
->```
->/tree/
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Response: 200
-```json
-{
-    "sum": 206,
-    "path": [
-        "b9acba7c-9d21-46cd-a041-d9a9f489c424",
-        "02e02109-e7a3-4f18-a3e6-48cf31fd4fac",
-        "f0d4e402-94d8-4e7a-acd4-3cd82821bbd2"
-    ]
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get User Tree
-### Method: GET
->```
->/tree
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|auth-key||
-
-
-### Response: 200
+**Request Body Schema:**
 ```json
 {
     "tree": {
-        "left": {
-            "left": {
-                "value": 98,
-                "uniqueId": "f0d4e402-94d8-4e7a-acd4-3cd82821bbd2"
-            },
-            "value": 97,
-            "uniqueId": "02e02109-e7a3-4f18-a3e6-48cf31fd4fac"
-        },
-        "right": {
-            "right": {
-                "value": 73,
-                "uniqueId": "ca599dc9-0e74-4a0d-b64d-b00b668df729"
-            },
-            "value": 13,
-            "uniqueId": "dd01c872-9180-4a9d-ab14-1b8948335444"
-        },
-        "value": 11,
-        "uniqueId": "b9acba7c-9d21-46cd-a041-d9a9f489c424"
-    },
-    "userId": 23,
-    "maxSumPath": {
-        "maxLeafToNode": {
-            "sum": 206,
-            "path": [
-                "b9acba7c-9d21-46cd-a041-d9a9f489c424",
-                "02e02109-e7a3-4f18-a3e6-48cf31fd4fac",
-                "f0d4e402-94d8-4e7a-acd4-3cd82821bbd2"
-            ]
-        }
+        "value": "number",
+        "left": "object (recursive tree structure)",
+        "right": "object (recursive tree structure)"
     }
 }
 ```
 
+**Response Schema:** `200 OK`
+```json
+"boolean"
+```
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+### Get Binary Tree Calculations
+Get calculations for the saved binary tree.
+
+**Endpoint:** `GET /tree/`
+
+**Headers:**
+```
+auth-key: string
+```
+
+**Response Schema:** `200 OK`
+```json
+{
+    "sum": "number",
+    "path": ["string"]
+}
+```
+
+### Get User Tree
+Retrieve the user's saved binary tree with calculations.
+
+**Endpoint:** `GET /tree`
+
+**Headers:**
+```
+auth-key: string
+```
+
+**Response Schema:** `200 OK`
+```json
+{
+    "tree": {
+        "value": "number",
+        "uniqueId": "string",
+        "left": "object (recursive tree structure)",
+        "right": "object (recursive tree structure)"
+    },
+    "userId": "number",
+    "maxSumPath": {
+        "maxLeafToNode": {
+            "sum": "number",
+            "path": ["string"]
+        }
+    }
+}
+```
