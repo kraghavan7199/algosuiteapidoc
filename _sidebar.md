@@ -1,0 +1,4 @@
+- [Home](README.md)
+- [Authentication](#authentication)
+- [String Operations](#string-operations)
+- [Tree Operations](#tree-operations)
